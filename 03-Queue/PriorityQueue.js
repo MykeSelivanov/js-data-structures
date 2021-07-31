@@ -1,45 +1,63 @@
 class Node {
     // Lower values indicate higher priority
     constructor(data, priority) {
-      this.data = data;
-      this.priority = priority;
-      this.next = null;
+        this.data = data;
+        this.priority = priority;
+        this.next = null;
     }
-  }
-  class PriorityQueue {
-    constructor(){
-      this.head = null;
+}
+class PriorityQueue {
+    constructor() {
+        this.head = null;
     }
     push(d, p) {
-      var temp = new Node(d, p);
-      let start = this.head; // pointer
-      // first node 
-      if(this.head === null) {
-        this.head = temp;
-        return;
-      }
-      // if pushed node's priority is smaller than first/head's priority
-      if (this.head.priority > p) {
-        // insert New Node before head
-        temp.next = this.head;
-        this.head = temp;
-        return;
-      } else {
-        // traverse the list and find a position to insert new node
-        while (start.next != null && start.next.priority < p) {
-          start = start.next;
+        var temp = new Node(d, p);
+        if (this.head === null) {
+            this.head = temp;
+            return;
         }
-        // either at the ends of the list or at required position
-        temp.next = start.next;
-        start.next = temp;
-      }
+        // pointer
+        let start = this.head;
+        if (this.head.priority > p) {
+            // Insert New Node before head
+            temp.next = this.head;
+            this.head = temp;
+            return;
+        } else {
+            // Traverse the list and find a position to insert new node
+            while (start.next != null && start.next.priority < p) {
+                start = start.next;
+            }
+            // Either at the ends of the list or at required position
+            temp.next = start.next;
+            start.next = temp;
+        }
     }
-  }
-  // Create a Priority Queue
-  // Queue: 7.4.5.6  Priorities: 0.1.2.3
-  var pq = new PriorityQueue();
-  pq.push(4, 1);
-  pq.push(5, 2);
-  pq.push(6, 3);
-  pq.push(7, 0);
-  console.log(pq);
+    // return top priority node
+    pop() {
+        let temp = this.head;
+        this.head = this.head.next;
+        temp.next = null
+        return temp;
+    }
+    // return top priority value
+    peek() {
+        return this.head.data;
+    }
+    // check if pq is emtpy
+    isEmpty() {
+        return this.head === null; // true or false
+    }
+}
+// Driver code
+// Create a Priority Queue
+// 7.4.5.6
+var pq = new PriorityQueue();
+pq.push(4, 1);
+pq.push(5, 2);
+pq.push(6, 3);
+pq.push(7, 0);
+pq.pop();
+console.log(pq.peek());
+console.log(pq.isEmpty())
+console.log(pq);
