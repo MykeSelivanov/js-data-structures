@@ -39,7 +39,11 @@ class HashTable {
     // retrieve/get
     get(key){
         const index = this._hash(key);
-        return this.table[index];
+        if(this.table[index]){
+            for(let i = 0; i < this.table.length; i++){
+                
+            }
+        }
     }
 
     // remove/delete
