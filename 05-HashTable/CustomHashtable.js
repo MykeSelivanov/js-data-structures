@@ -12,6 +12,7 @@ class HashTable {
         for (let i = 0; i < key.length; i++) {
             hash += key.charCodeAt(i);
         }
+        // adding multiplication to prime number to avoid grouping
         return hash % this.table.length * 7;
     }
 
@@ -19,10 +20,20 @@ class HashTable {
     set(key, value){
         // get indesx to store
         const index = this._hash(key);
-        
+        // check if index is already occupied
         if(this.table[index]){
-            for (let i = 0; )
+            for (let i = 0; this.table[index].length; i++){
+                // check if the same key already exists - update the value
+                if (this.table[index][i][0] === key) this.table[index][i][1] = value;
+                return;
+            }
+            // there is no same key, add one more entry to array at the same index
+            this.table[index].push([key,value]);
+        } else {
+            this.table[index] = [];
+            this.table[index].push([key,value]);
         }
+        this.size++;
     }
 
     // retrieve/get
