@@ -8,3 +8,5 @@ function multiply(x, y) {
     
     return x + multiply(x, y-1);
 }
+
+console.log(multiply(5,11)); // 55
