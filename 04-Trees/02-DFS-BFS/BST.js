@@ -71,14 +71,27 @@ class BST {
 
     DFSPreOrder() {
         let results = [];
-        function dfsHelper(currentNode) {
+        function preOrderHelper(currentNode) {
             results.push(currentNode.value);
-            if(currentNode.left) dfsHelper(currentNode.left);
-            if(currentNode.right) dfsHelper(currentNode.right);
+            if(currentNode.left) preOrderHelper(currentNode.left);
+            if(currentNode.right) preOrderHelper(currentNode.right);
         }
-        dfsHelper(this.root);
+        preOrderHelper(this.root);
         return results;
     }
+
+    DFSInOrder(){
+        let results = [];
+        function inOrderHelper(currentNode){
+            if(currentNode.left) inOrderHelper(currentNode.left);
+            results.push(currentNode.value);
+            if(currentNode.right) inOrderHelper(currentNode.right);
+        }
+        inOrderHelper(this.root);
+        return results;
+    }
+
+  
 }
 
 let bst = new BST();
@@ -97,10 +110,25 @@ console.log(bst.insert(13));
 //   6    9   11    13
 console.log("BFS", bst.BFS());
 
-// DFSPreOrder
+// DFS Pre Order
 // expected [10, 8, 6, 9, 12, 11, 13]
 //          10
 //      8        12
 //   6    9   11    13
 console.log("DFS PreOrder", bst.DFSPreOrder());
+
+// DFS In Order
+// expected [6, 8, 9, 10, 11, 12, 13]
+//          10
+//      8        12
+//   6    9   11    13
+console.log("DFS InOrder", bst.DFSInOrder());
+
+// DFS Post Order
+// expected [6, 9, 8, 10, 11, 12, 13]
+//          10
+//      8        12
+//   6    9   11    13
+console.log("DFS InOrder", bst.DFSInOrder());
+
 
