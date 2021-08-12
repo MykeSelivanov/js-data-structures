@@ -68,6 +68,17 @@ class BST {
         return results;
         // return results array at the end
     }
+
+    DFSPreOrder() {
+        let results = [];
+        function dfsHelper(currentNode) {
+            results.push(currentNode.value);
+            if(currentNode.left) dfsHelper(currentNode.left);
+            if(currentNode.right) dfsHelper(currentNode.right);
+        }
+        dfsHelper(this.root);
+        return results;
+    }
 }
 
 let bst = new BST();
@@ -79,8 +90,17 @@ console.log(bst.insert(12));
 console.log(bst.insert(11));
 console.log(bst.insert(13));
 
+// BFS
+// expected [10, 8, 12, 6, 9, 11, 13]
 //          10
 //      8        12
 //   6    9   11    13
+console.log("BFS", bst.BFS());
 
-console.log(bst.BFS());
+// DFSPreOrder
+// expected [10, 8, 6, 9, 12, 11, 13]
+//          10
+//      8        12
+//   6    9   11    13
+console.log("DFS PreOrder", bst.DFSPreOrder());
+
