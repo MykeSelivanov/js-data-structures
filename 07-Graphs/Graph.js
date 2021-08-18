@@ -27,14 +27,29 @@ class Graph {
         }
         return false;
     }
+
+    removeVertex(vertex) {
+        if(!this.adjacencyList[vertex]) return undefined;
+
+        while(this.adjacencyList[vertex].length) {
+            let connectedVertex = this.adjacencyList[vertex].pop();
+            this.removeEdge(vertex, connectedVertex);
+        }
+        delete this.adjacencyList[vertex];
+        return this;
+    }
 }
 
 let graph = new Graph();
 graph.addVertex('A');
 graph.addVertex('B');
 graph.addVertex('C');
+graph.addVertex('D');
 graph.addEdge('A', 'B');
 graph.addEdge('A', 'C');
 graph.addEdge('B', 'C');
-graph.removeEdge('A','B');
+graph.addEdge('C', 'D');
+graph.addEdge('A', 'D');
+graph.removeEdge('D','C');
+graph.removeVertex('C');
 console.log(`graph`, graph);
