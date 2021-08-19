@@ -41,7 +41,7 @@ class Graph {
 }
 
 // Breadth First Search
-function breadthFirstSearch(startVertex) {
+function breadthFirstSearch(startVertex, graph) {
     const queue = [startVertex];
     const result = [];
     const visited = {};
@@ -49,10 +49,10 @@ function breadthFirstSearch(startVertex) {
 
     while(queue.length) {
         // shift from queue and push to the result
-        current = queue.shift();
+        let current = queue.shift();
         result.push(current);
 
-        this.adjacencyList[current].forEach(vertex => {
+        graph.adjacencyList[current].forEach(vertex => {
             if(!visited[vertex]){
                 visited[vertex] = true;
                 queue.push(vertex);
@@ -61,3 +61,38 @@ function breadthFirstSearch(startVertex) {
     }
     return result;
 }
+
+// Depth First Search
+function depthFirstSearch(startVertex, graph) {
+    const result = [];
+    const visited = {};
+
+    function helperDepth(vertex) {
+        if(!vertex) return null;
+        visited[vertex] = true;
+        result.push(vertex);
+        graph.adjacencyList[vertex].forEach(vertex => {
+            if(!visited[vertex]) {
+                return helperDepth(vertex);
+            }
+        })
+    }
+    helperDepth(startVertex);
+    return result;
+}
+
+let graph = new Graph();
+graph.addVertex('A');
+graph.addVertex('B');
+graph.addVertex('C');
+graph.addVertex('D');
+graph.addVertex('E');
+graph.addEdge('A', 'B');
+graph.addEdge('A', 'C');
+graph.addEdge('B', 'C');
+graph.addEdge('C', 'D');
+graph.addEdge('A', 'D');
+graph.addEdge('D', 'E');
+
+console.log(breadthFirstSearch('A', graph));
+console.log(depthFirstSearch('E', graph));
