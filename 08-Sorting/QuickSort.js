@@ -17,6 +17,9 @@ function quiickSortHelper(array, startIdx, endIdx) {
         if (array[rightPointer] >= array[pivot]) rightPointer--;
     }
     swap(pivot, rightPointer, array);
+    quiickSortHelper(array, startIdx, rightPointer - 1);
+    quiickSortHelper(array, rightPointer + 1, endIdx);
+
 }
 
 function swap(leftIdx, rightIdx, array) {
@@ -24,3 +27,7 @@ function swap(leftIdx, rightIdx, array) {
     array[rightIdx] = array[leftIdx];
     array[leftIdx] = temp;
 }
+
+const array = [8,7,3,5,12,4,0,-1,3,3,7];
+
+console.log(quickSort(array));
