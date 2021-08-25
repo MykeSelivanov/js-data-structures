@@ -17,8 +17,14 @@ function quiickSortHelper(array, startIdx, endIdx) {
         if (array[rightPointer] >= array[pivot]) rightPointer--;
     }
     swap(pivot, rightPointer, array);
-    quiickSortHelper(array, startIdx, rightPointer - 1);
-    quiickSortHelper(array, rightPointer + 1, endIdx);
+    const leftToPivotSubarrayIsSmaller = rightPointer - 1 - startIdx < endIdx - (rightPointer + 1);
+    if (leftToPivotSubarrayIsSmaller) {
+        quiickSortHelper(array, startIdx, rightPointer - 1);
+        quiickSortHelper(array, rightPointer + 1, endIdx);
+    } else {
+        quiickSortHelper(array, rightPointer + 1, endIdx);
+        quiickSortHelper(array, startIdx, rightPointer - 1);
+    }
 
 }
 
@@ -28,6 +34,6 @@ function swap(leftIdx, rightIdx, array) {
     array[leftIdx] = temp;
 }
 
-const array = [8,7,3,5,12,4,0,-1,3,3,7];
+const array = [8, 7, 3, 5, 12, 4, 0, -1, 3, 3, 7];
 
 console.log(quickSort(array));
