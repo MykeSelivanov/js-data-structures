@@ -13,7 +13,10 @@ function quiickSortHelper(array, startIdx, endIdx) {
         if (array[leftPointer] > array[pivot] && array[rightPointer] < array[pivot]) {
             swap(leftPointer, rightPointer, array);
         }
+        if (array[leftPointer] <= array[pivot]) leftPointer++;
+        if (array[rightPointer] >= array[pivot]) rightPointer--;
     }
+    swap(pivot, rightPointer, array);
 }
 
 function swap(leftIdx, rightIdx, array) {
