@@ -35,3 +35,7 @@ function mergeHelper(leftSubarray, rightSubarray) {
     }
     return sorted;
 }
+
+const array = [8, 7, 3, 5, 12, 4, 0, -1, 3, 3, 7];
+
+console.log(quickSort(array));
